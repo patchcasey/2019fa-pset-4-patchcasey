@@ -13,6 +13,10 @@ awscli = "*"
 pandas = "*"
 xlrd = "*"
 fastparquet = "*"
+luigi = "*"
+torch = "*"
+torchvision = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.7"
