@@ -17,6 +17,7 @@ luigi = "*"
 torch = "*"
 torchvision = "*"
 boto3 = "*"
+csci-utils = {editable = true,git = "https://github.com/csci-e-29/2019fa-csci-utils-patchcasey"}
 
 [requires]
 python_version = "3.7"

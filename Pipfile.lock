@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "aafd51b6d4936d5dc39939a5ace2c92b6c324980aab1ac2158e6f7c1d2641466"
+            "sha256": "91554ae3ed8076dce57882f9f48d79eef19ea55059f474b890c06795a7c59af2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,28 +16,35 @@
         ]
     },
     "default": {
+        "atomicwrites": {
+            "hashes": [
+                "sha256:03472c30eb2c5d1ba9227e4c2ca66ab8287fbfbbda3888aa93dc2e28fc6811b4",
+                "sha256:75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"
+            ],
+            "version": "==1.3.0"
+        },
         "awscli": {
             "hashes": [
-                "sha256:192fefd67054d9264f12c85b3528487bd2815e2b11a9bb67ab3148d7a6a71348",
-                "sha256:846e600299b55f57a9d0df05074f040c3559ee29c9d3046d4f734d4af8dbaaad"
+                "sha256:3e2faac56f4fc7ce23a4a0625f422b908b25cb1c178e5f8879ddfc4e80a57549",
+                "sha256:5b37212405ce6c05262abc605fbf7099bea5f47b3192f236375a7f21d2bbe9ef"
             ],
             "index": "pypi",
-            "version": "==1.16.269"
+            "version": "==1.16.270"
         },
         "boto3": {
             "hashes": [
-                "sha256:03130f43e15f02af7040946f7d4ebbba410fba5ee210b48ca8ba8407d2960b87",
-                "sha256:0b294a58635ed882a3821854f00264e6b3e65f2114c85c64109ad2280c7d5608"
+                "sha256:2945d8246e4c8875e3ae4aafffd028330ef681efc33e1475c1a805ed42540403",
+                "sha256:3d84311ce0f2fba83810f0e840b08e2b66246fc80dbb0a71fb992116f47b95bd"
             ],
             "index": "pypi",
-            "version": "==1.10.5"
+            "version": "==1.10.6"
         },
         "botocore": {
             "hashes": [
-                "sha256:13bf9d0d9b9cda278349c9ba0c35c96570795438d5bd29e5188e110b3f5a5183",
-                "sha256:cfce2c7d6a218d693ed6daa8a41040761e35d7a728d1cf43ae14c4132fb146f3"
+                "sha256:ac1a5caa10e3c4452714b17e6f30f05b4b6e57e0c80b19c1f4d72b234edf6646",
+                "sha256:fa6b9e619423f3891e7c11b98f2183da8173e3fed995271e93fd4a712ef45777"
             ],
-            "version": "==1.13.5"
+            "version": "==1.13.6"
         },
         "colorama": {
             "hashes": [
@@ -46,6 +53,11 @@
             ],
             "markers": "python_version != '2.6' and python_version != '3.3'",
             "version": "==0.4.1"
+        },
+        "csci-utils": {
+            "editable": true,
+            "git": "https://github.com/csci-e-29/2019fa-csci-utils-patchcasey",
+            "ref": "19e1e06cb3cfa8d230c05f678ee053aa2310cc14"
         },
         "docutils": {
             "hashes": [

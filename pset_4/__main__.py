@@ -6,6 +6,8 @@ import pandas as pd
 import fastparquet
 import os
 
+from .cli import main
+
 
 def get_user_hash(username, salt=None):
 
@@ -40,5 +42,4 @@ def parquet_conv(filename, cwd=os.getcwd(), datasourceformat=".xlsx"):
 
 
 if __name__ == "__main__":
-    call_getuserid()
-    parquet_conv(filename="hashed")
+    main()
