@@ -1,5 +1,10 @@
 # Pset 4
 
+[![Build Status](https://travis-ci.com/csci-e-29/2019fa-pset-4-patchcasey.svg?token=5ichzqk8s8tsSTcNuNkm&branch=master)](https://travis-ci.com/csci-e-29/2019fa-pset-4-patchcasey)
+[![Maintainability](https://api.codeclimate.com/v1/badges/56148ee51a3d787737a8/maintainability)](https://codeclimate.com/repos/5dbc57c934bbf701a201bf0b/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/56148ee51a3d787737a8/test_coverage)](https://codeclimate.com/repos/5dbc57c934bbf701a201bf0b/test_coverage)
+
+
 Pytorch has implemented a neat algorithm for artistic style transfer
 [here](https://github.com/pytorch/examples/tree/master/fast_neural_style). For
 this pset, we will be using a pre-trained model for styling our own input image,
@@ -530,4 +535,3 @@ already exists locally.  It will also skip upload if it finds the image in S3,
 so Travis and new jobs will work just fine (so long as the images are uploaded).
 
 Try to think of the best way to generalize a solution!
->>>>>>> origin/master
