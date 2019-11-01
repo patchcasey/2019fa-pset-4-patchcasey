@@ -22,7 +22,7 @@ jobs:
       before_install:
         - echo -e "machine github.com\n  login patchcasey\n  password $CI_USER_PASSWORD" > ~/.netrc
       install:
-        - pipenv install --dev --ignore-pipfile --deploy
+        - pipenv install --dev --deploy
       before_script: # code coverage tool
          - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
          - chmod +x ./cc-test-reporter
@@ -34,6 +34,6 @@ jobs:
       before_install:
         - echo -e "machine github.com\n  login patchcasey\n  password $CI_USER_PASSWORD" > ~/.netrc
       install:
-        - pipenv install --dev --ignore-pipfile --deploy
+        - pipenv install --dev --deploy
       script:
       - python3 -m pset_4
