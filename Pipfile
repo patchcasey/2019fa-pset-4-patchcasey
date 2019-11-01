@@ -14,8 +14,8 @@ pandas = "*"
 xlrd = "*"
 fastparquet = "*"
 luigi = "*"
-torch = "*"
-torchvision = "*"
+torch = "==1.3.0"
+torchvision = "==0.4.1"
 boto3 = "*"
 csci-utils = {editable = true,git = "https://github.com/csci-e-29/2019fa-csci-utils-patchcasey"}
 
