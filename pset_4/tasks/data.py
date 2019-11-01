@@ -1,10 +1,11 @@
 import os
 
-from luigi import ExternalTask, Parameter, Task, LocalTarget
+from luigi import ExternalTask, Parameter, Task, LocalTarget, format
 from luigi.contrib.s3 import S3Target, S3Client
 from ..hash_str import get_csci_salt
 
 image_name = 'luigi.jpeg'
+model_name = 'rain_princess.pth'
 
 class ContentImage(ExternalTask):
     IMAGE_ROOT = 's3://pset4data/pset_4/images'  # Root S3 path, as a constant
@@ -15,7 +16,9 @@ class ContentImage(ExternalTask):
     def output(self):
         client = S3Client(get_csci_salt(keyword='aws_access_key_id',convert_to_bytes="no"),
                                         get_csci_salt('aws_secret_access_key',convert_to_bytes="no"))
-        return S3Target('s3://pset4data/pset_4/images/luigi.jpeg', client=client)  # return the S3Target of the image
+        return S3Target('s3://pset4data/pset_4/images/luigi.jpeg',
+                        client=client,
+                        format=format.Nop)  # return the S3Target of the image
 
 
 class SavedModel(ExternalTask):
@@ -24,28 +27,34 @@ class SavedModel(ExternalTask):
     model = Parameter('rain_princess.pth') # Filename of the model
 
     def output(self):
-        return S3Target('s3://pset4data/pset_4/saved_models/rain_princess.pth')
+        return S3Target('s3://pset4data/pset_4/saved_models/rain_princess.pth', format=format.Nop)
         # return the S3Target of the model
 
-# class DownloadModel(Task):
-#     S3_ROOT = 's3://pset4data/'
-#     #TODO - maybe change location of folder or this directory?
-#     LOCAL_ROOT = os.path.abspath('data')
-#     SHARED_RELATIVE_PATH = 'saved_models'
-#
-#     model = ... #luigi parameter
-#
-#     def requires(self):
-#         # Depends on the SavedModel ExternalTask being complete
-#         # i.e. the file must exist on S3 in order to copy it locally
-#         return SavedModel(self)
-#
-#     def output(self):
-#
-#
-#     def run(self):
-#         # Use self.output() and self.input() targets to atomically copy
-#         # the file locally!
+class DownloadModel(Task):
+    S3_ROOT = 's3://pset4data/'
+    LOCAL_ROOT = os.path.abspath('data')
+    SHARED_RELATIVE_PATH = 'saved_models'
+
+    model = Parameter('rain_princess.pth') #luigi parameter
+
+    def requires(self):
+        # Depends on the SavedModel ExternalTask being complete
+        # i.e. the file must exist on S3 in order to copy it locally
+        return SavedModel()
+
+    def output(self):
+        targetpath = os.path.join(os.getcwd(), 'data/')
+        target = os.path.join(targetpath, model_name)
+
+        return LocalTarget(target, format=format.Nop)
+
+    def run(self):
+        # Use self.output() and self.input() targets to atomically copy
+        # the file locally!
+        with self.input().open('r') as f:
+            result = f.read()
+            with self.output().open('wb') as outfile:
+                outfile.write(result)
 
 class DownloadImage(Task):
     S3_ROOT = 's3://pset4data/'
@@ -56,28 +65,19 @@ class DownloadImage(Task):
 
     def requires(self):
         # Depends on the ContentImage ExternalTask being complete
-        return ContentImage(self)
+        return ContentImage()
 
     def output(self):
-        targetpath = os.path.join(os.getcwd(), "../..", 'data/')
+        targetpath = os.path.join(os.getcwd(), 'data/')
         target = os.path.join(targetpath, image_name)
 
-        return LocalTarget(target)
+        return LocalTarget(target, format=format.Nop)
 
+    # TODO - replace with atomicwrite
     def run(self):
         # Use self.output() and self.input() targets to atomically copy
         # the file locally!
-
-        writing = self.input()
-        outfile = self.output().open('w')
-        print(outfile)
-
-
-
-        # for input in self.input():
-        #     print("test")
-        #     with input.open() as f:
-        #         result = f
-        # if result:
-        #     out_file = self.output().open('w')
-        #     out_file.write(input)
+        with self.input().open('r') as f:
+            result = f.read()
+            with self.output().open('wb') as outfile:
+                outfile.write(result)
