@@ -4,19 +4,19 @@ from luigi import ExternalTask, Parameter, Task, LocalTarget, format
 from luigi.contrib.s3 import S3Target, S3Client
 from ..hash_str import get_csci_salt
 
-image_name = 'luigi.jpeg'
-model_name = 'rain_princess.pth'
+image_name = 'Waluigi.jpeg'
+model_name = 'udnie.pth'
 
 class ContentImage(ExternalTask):
     IMAGE_ROOT = 's3://pset4data/pset_4/images'  # Root S3 path, as a constant
 
     # Name of the image
-    image = Parameter('luigi.jpeg')  # Filename of the image under the root s3 path
+    image = Parameter('Waluigi.jpeg')  # Filename of the image under the root s3 path
 
     def output(self):
         client = S3Client(get_csci_salt(keyword='aws_access_key_id',convert_to_bytes="no"),
                                         get_csci_salt('aws_secret_access_key',convert_to_bytes="no"))
-        return S3Target('s3://pset4data/pset_4/images/luigi.jpeg',
+        return S3Target('s3://pset4data/pset_4/images/Waluigi.jpeg',
                         client=client,
                         format=format.Nop)  # return the S3Target of the image
 
@@ -24,10 +24,10 @@ class ContentImage(ExternalTask):
 class SavedModel(ExternalTask):
     MODEL_ROOT = 's3://pset4data/pset_4/saved_models/'
 
-    model = Parameter('rain_princess.pth') # Filename of the model
+    model = Parameter('udnie.pth') # Filename of the model
 
     def output(self):
-        return S3Target('s3://pset4data/pset_4/saved_models/rain_princess.pth', format=format.Nop)
+        return S3Target('s3://pset4data/pset_4/saved_models/udnie.pth', format=format.Nop)
         # return the S3Target of the model
 
 class DownloadModel(Task):
@@ -35,7 +35,7 @@ class DownloadModel(Task):
     LOCAL_ROOT = os.path.abspath('data')
     SHARED_RELATIVE_PATH = 'saved_models'
 
-    model = Parameter('rain_princess.pth') #luigi parameter
+    model = Parameter('udnie.pth') #luigi parameter
 
     def requires(self):
         # Depends on the SavedModel ExternalTask being complete
@@ -61,7 +61,7 @@ class DownloadImage(Task):
     LOCAL_ROOT = os.path.abspath('data')
     SHARED_RELATIVE_PATH = 'images'
 
-    image = Parameter('luigi.jpeg') # Luigi parameter
+    image = Parameter('Waluigi.jpeg') # Luigi parameter
 
     def requires(self):
         # Depends on the ContentImage ExternalTask being complete

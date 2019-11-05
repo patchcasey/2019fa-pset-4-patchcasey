@@ -6,6 +6,6 @@ from .tasks.stylize import Stylize
 def main():
     build([
         Stylize(
-            model='rain_princess.pth',
-            image='luigi.jpeg'
+            model='udnie.pth',
+            image='Waluigi.jpeg'
         )], local_scheduler=True)

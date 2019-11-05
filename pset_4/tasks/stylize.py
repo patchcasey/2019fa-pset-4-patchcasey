@@ -2,11 +2,11 @@ from neural_style.neural_style import stylize
 import os
 
 from luigi import ExternalTask, Parameter, Task, LocalTarget, format
-# from csci_utils.luigi.target import SuffixPreservingLocalTarget
+from csci_utils import luigi as csci_luigi
 from .data import DownloadModel, DownloadImage
 
-image_name = 'luigi.jpeg'
-model_name = 'rain_princess.pth'
+image_name = 'Waluigi.jpeg'
+model_name = 'udnie.pth'
 
 class Stylize(Task):
     targetpath = os.path.join(os.getcwd(), 'data/')
@@ -25,8 +25,8 @@ class Stylize(Task):
     def output(self):
         # return SuffixPreservingLocalTarget of the stylized image
         targetpath = os.path.join(os.getcwd(), 'data/')
-        styled_image = os.path.join(targetpath, 'styled_image.jpeg')
-        return LocalTarget(styled_image, format=format.Nop)
+        styled_image = os.path.join(targetpath, 'styled_image_Waluigi_udnie_test2.jpeg')
+        return csci_luigi.SuffixPreservingLocalTarget(styled_image, format=format.Nop)
 
     def run(self):
         # For example
