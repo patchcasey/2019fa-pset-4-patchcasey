@@ -7,5 +7,5 @@ def main():
     build([
         Stylize(
             model='udnie.pth',
-            image='Waluigi.jpeg'
+            image='luigi.jpeg'
         )], local_scheduler=True)
