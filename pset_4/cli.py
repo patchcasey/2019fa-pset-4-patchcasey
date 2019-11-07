@@ -1,5 +1,4 @@
 from luigi import build
-from .tasks.data import ContentImage, DownloadImage, DownloadModel
 from .tasks.stylize import Stylize
 
 

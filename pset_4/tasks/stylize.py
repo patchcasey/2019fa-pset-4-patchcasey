@@ -3,9 +3,8 @@ import os
 
 from luigi import ExternalTask, Parameter, Task, LocalTarget, format
 from csci_utils import luigi as csci_luigi
-from .data import DownloadModel, DownloadImage
 
-image_name = 'Waluigi.jpeg'
+image_name = 'luigi.jpeg'
 model_name = 'udnie.pth'
 
 class Stylize(Task):
@@ -18,8 +17,8 @@ class Stylize(Task):
 
     def requires(self):
         return {
-            'image': DownloadImage(),
-            'model': DownloadModel()
+            'image': csci_luigi.DownloadImage(),
+            'model': csci_luigi.DownloadModel()
         }
 
     def output(self):
@@ -41,5 +40,4 @@ class Stylize(Task):
             export_onnx = False
 
         stylize(args)
-        # os.link(temp_output_path,self.output())
 
